@@ -29,5 +29,5 @@ jobs:
         script: |
           cd pyapp-test
           git pull
-          for i in `jobs`; do kill -9 %1 ; done
-          make run &
+          kill -9 `lsof -t -i :5001`
+          make run > log.txt 2>&1 &
