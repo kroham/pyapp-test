@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -16,7 +17,7 @@ jobs:
       run: make test
       
   deploy:
-    name: Demploy
+    name: Deploy
     if: steps.test.outcome == 'success'
     runs-on: ubuntu-latest
     steps:
