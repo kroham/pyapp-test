@@ -14,3 +14,19 @@ jobs:
 
     - name: Run tests
       run: make test
+      
+  deploy:
+    name: Demploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          git pull
+          for i in `jobs`; do kill -9 %1 ; done
+          make run &
