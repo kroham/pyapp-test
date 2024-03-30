@@ -17,7 +17,7 @@ jobs:
       
   deploy:
     name: Demploy
-    if: jobs.test.outcome == 'success'
+    if: steps.test.outcome == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
