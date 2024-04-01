@@ -24,9 +24,6 @@ jobs:
     - name: executing remote ssh commands
       run: |
         ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} 
-        cd pyapp-test
-        git pull
-        kill -9 `lsof -t -i :5001`
-        make run > log.txt 2>&1 &  
+        pwd
           
      
