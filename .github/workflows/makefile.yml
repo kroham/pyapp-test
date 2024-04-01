@@ -21,15 +21,11 @@ jobs:
     needs: test
     runs-on: self-hosted
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: 22
-        script: |
-          cd pyapp-test
-          git pull
-          kill -9 `lsof -t -i :5001`
-          make run > log.txt 2>&1 &
+    - name: executing remote ssh commands
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 
+        cd pyapp-test
+        git pull
+        kill -9 `lsof -t -i :5001`
+        make run > log.txt 2>&1 &    
+     
